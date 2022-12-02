@@ -9,8 +9,13 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard',     title: 'Dashboard',         icon:'nc-bank',       class: '' },
-    { path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
+    { path: '/dashboard',     title: 'Dashboard',                   icon:'nc-bank',       class: '' },
+    { path: '/table',         title: 'Categorias',                  icon:'nc-bullet-list-67',    class: '' },
+    { path: '/table',         title: 'Fornecedor/Cliente',          icon:'nc-bus-front-12',    class: '' },
+    { path: '/table',         title: 'Dia Vencimento Padrão',       icon:'nc-calendar-60',    class: '' },
+    { path: '/table',         title: 'Formas de Pagamento',         icon:'nc-money-coins',    class: '' },
+    { path: '/table',         title: 'Receitas',                    icon:'nc-paper',    class: '' },
+    { path: '/table',         title: 'Despesas',                    icon:'nc-tile-56',    class: '' },
 ];
 
 @Component({
