@@ -9,6 +9,7 @@ import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { TableComponent } from '../../pages/table/table.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {ReceitasComponent} from "../../pages/receitas/receitas.component";
 import {DespesasComponent} from "../../pages/despesas/despesas.component";
 
 @NgModule({
@@ -21,6 +22,7 @@ import {DespesasComponent} from "../../pages/despesas/despesas.component";
   declarations: [
     DashboardComponent,
     TableComponent,
+    ReceitasComponent,
     DespesasComponent
   ]
 })
