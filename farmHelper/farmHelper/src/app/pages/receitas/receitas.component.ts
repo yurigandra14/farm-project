@@ -11,7 +11,7 @@ export class ReceitasComponent implements OnInit{
 
     formasPagamento: string[] = ['ESCOLHA A FORMA DE PAGAMENTO','PIX', 'CHEQUE', 'DINHEIRO', 'CARTÃO'];
     receitas: Receitas[];
-    tituloTabela: string[] =  [
+    tituloTabela: string[] = [
         'ID',
         'Fornecedor',
         'Descrição',
@@ -25,6 +25,7 @@ export class ReceitasComponent implements OnInit{
     ];
     formulario: Receitas = new Receitas();
     isEditar: boolean = false;
+    clicked: boolean = false;
 
     ngOnInit(){
         this.receitas = [
@@ -56,14 +57,22 @@ export class ReceitasComponent implements OnInit{
     }
 
     atualizar(receitas: Receitas) {
-        console.log(receitas.fornecedor);
+        this.clicked = true;
+        this.isEditar = true;
         this.formulario.id = receitas.id;
         this.formulario.fornecedor = receitas.fornecedor;
         this.formulario.descricao = receitas.descricao;
-
+        this.formulario.dataPagamento = receitas.dataPagamento;
+        this.formulario.dataVencimento = receitas.dataVencimento;
+        this.formulario.formaPagamento = receitas.formaPagamento;
         this.formulario.valor = receitas.valor;
         this.formulario.notaFiscal = receitas.notaFiscal;
-        this.isEditar = true;
+        this.formulario.status = receitas.status;
+    }
+
+    novaReceita() {
+        this.clicked = true;
+        this.isEditar = false;
     }
 }
 
