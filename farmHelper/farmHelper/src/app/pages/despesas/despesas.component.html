@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="card mx-auto">
+<div [ngStyle]="clicked?{'position': 'absolute', 'z-index': '999999', 'left': '50%', 'transform': 'translateX(-50%)'} : {'display': 'none'}">
+    <div class="card mx-auto " *ngIf="clicked">
         <div class="card-header">
             <h4 class="card-title"> Cadastrar Despesa </h4>
         </div>
@@ -56,10 +56,15 @@
                         <input type="checkbox" name="foiPago" id="foiPago" [(ngModel)]="formulario.status">
                     </div>
                 </div>
-                <button class="btn btn-danger btn-lg btn-block" (click)="cadastrarDespesa()">{{isEditar ? 'Atualizar' : 'Cadastrar'}}</button>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button class="btn btn-danger btn-lg btn-block" (click)="clicked = false">Cancelar</button>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <button class="btn btn-primary btn-lg btn-block" (click)="cadastrarDespesa()">{{isEditar ? 'Atualizar' : 'Cadastrar'}}</button>
+                    </div>
+                </div>
             </form>
-
-
         </div>
     </div>
 </div>
@@ -68,7 +73,13 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title"> Despesas</h4>
+                <h4 class="card-title" style="display: inline-block"> Despesas</h4>
+                <button class="btn btn-primary btn-sm" style="position: absolute; right: 1%" (click)="novaDespesa()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    Nova Despesa
+                </button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
