@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Categoria} from "../../model/enum/Categoria";
 
 
 
@@ -53,19 +54,5 @@ export class CategoriaComponent implements OnInit {
         this.formulario.nome = despesa.nome;
         this.formulario.descricao = despesa.descricao;
         this.isEditar = true
-    }
-}
-
-export class Categoria {
-    public static contador: number = 0;
-    public id: number;
-    public nome: string;
-    public descricao: string;
-
-    constructor(nome?: string, descricao?: string) {
-        Categoria.contador ++;
-        this.id = Categoria.contador;
-        this.nome = nome;
-        this.descricao = descricao;
     }
 }
