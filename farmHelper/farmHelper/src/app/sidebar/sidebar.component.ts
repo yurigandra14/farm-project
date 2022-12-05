@@ -13,6 +13,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/table',         title: 'Table List',        icon:'nc-tile-56',    class: '' },
     { path: '/despesas',         title: 'Despesas',        icon:'nc-paper',    class: '' },
     { path: '/categorias',         title: 'Categorias',        icon:'nc-paper',    class: '' },
+    { path: '/fornecedor',         title: 'Fornecedor',        icon:'nc-paper',    class: '' },
 ];
 
 @Component({
