@@ -7,7 +7,8 @@ import {Fornecedor} from "../../model/Fornecedor";
 @Component({
     selector: 'fornecedor-cmp',
     moduleId: module.id,
-    templateUrl: 'fornecedor.component.html'
+    templateUrl: 'fornecedor.component.html',
+    styleUrls: ['fornecedor.component.css']
 })
 
 export class FornecedorComponent implements OnInit {
@@ -27,10 +28,10 @@ export class FornecedorComponent implements OnInit {
 
     ngOnInit(){
         this.fornecedores = [
-            new Fornecedor('Yuri', 'Mão de obra manejo ordenha', "teste@gmail.com", "teste", EnumTipoRelacionamento.FORNECEDOR, '555449841321', EnumTipoRelacionamento.FORNECEDOR),
-            new Fornecedor('José Miguel', 'Minerais', "teste@gmail.com", "teste", EnumTipoRelacionamento.CLIENTE, '65423334', EnumTipoRelacionamento.CLIENTE),
-            new Fornecedor('Rafaela', 'Medicamentos', "teste@gmail.com", "teste", EnumTipoRelacionamento.FORNECEDOR, '66962533', EnumTipoRelacionamento.FORNECEDOR),
-            new Fornecedor('Josefina', 'Vacinas', "teste@gmail.com", "teste", EnumTipoRelacionamento.FORNECEDOR, '112345434', EnumTipoRelacionamento.FORNECEDOR),
+            new Fornecedor('Yuri', 'Mão de obra manejo ordenha', "teste@gmail.com", "teste", "37998456312", '555449841321', EnumTipoRelacionamento.FORNECEDOR),
+            new Fornecedor('José Miguel', 'Minerais', "teste@gmail.com", "teste", "37998456312", '65423334', EnumTipoRelacionamento.CLIENTE),
+            new Fornecedor('Rafaela', 'Medicamentos', "teste@gmail.com", "teste", "37998456312", '66962533', EnumTipoRelacionamento.FORNECEDOR),
+            new Fornecedor('Josefina', 'Vacinas', "teste@gmail.com", "teste", "37998456312", '112345434', EnumTipoRelacionamento.FORNECEDOR),
         ]
     }
 
