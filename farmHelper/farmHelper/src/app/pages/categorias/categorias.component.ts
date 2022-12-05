@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Categoria} from "../../model/enum/Categoria";
+import {CategoriaService} from "../../service/categoria.service";
 
 
 
@@ -20,36 +21,46 @@ export class CategoriaComponent implements OnInit {
     formulario: Categoria = new Categoria();
     isEditar: boolean = false;
 
-    ngOnInit(){
-        this.categorias = [
-            new Categoria('Yuri', 'Mão de obra manejo ordenha'),
-            new Categoria('José Miguel', 'Minerais'),
-            new Categoria('Rafaela', 'Medicamentos'),
-            new Categoria('Josefina', 'Vacinas'),
-        ]
+
+    constructor(private categoriaService: CategoriaService) {
     }
 
-    cadastrarDespesa() {
+    ngOnInit(){
+        this.categorias = this.categoriaService.getCategorias()
+        this.categoriaService.saveCategoria(new Categoria('Ordenha', 'Mão de obra manejo ordenha'))
+        this.categoriaService.saveCategoria(new Categoria('Manejo Leiteiro', 'Mão de obra manejo ordenha'))
+        this.categoriaService.saveCategoria(new Categoria('Teste', 'Mão de obra manejo ordenha'))
+        this.categoriaService.saveCategoria(new Categoria('teste2', 'Mão de obra manejo ordenha'))
+        this.categorias = this.categoriaService.getCategorias();
+    }
+
+    cadastrarCategoria() {
         if (this.isEditar) {
-            this.categorias.forEach(despesa => {
-                if(despesa.id === this.formulario.id) {
-                    despesa = this.formulario;
-                }
-            })
+            this.categorias = this.atualizaAndBuscaCategorias()
             this.isEditar = false;
             return;
         }
-        this.formulario.id = Categoria.contador;
-        this.categorias.push(this.formulario);
+        this.categorias = this.salvaAndBuscaCategorias()
         this.formulario = new Categoria();
     }
 
+    salvaAndBuscaCategorias() {
+        this.formulario.id = Categoria.contador;
+        this.categoriaService.saveCategoria(this.formulario)
+        return this.categoriaService.getCategorias();
+    }
+
+    atualizaAndBuscaCategorias() {
+        this.categoriaService.atualizarCategoria(this.formulario)
+        return this.categoriaService.getCategorias();
+    }
+
     deletar(id: number) {
-        this.categorias = this.categorias.filter(despesa => despesa.id !== id);
+        this.categoriaService.deletarCategoria(id)
+        this.categorias = this.categoriaService.getCategorias()
     }
 
     atualizar(despesa: Categoria) {
-        console.log(despesa);
         this.formulario.id = despesa.id;
         this.formulario.nome = despesa.nome;
         this.formulario.descricao = despesa.descricao;
