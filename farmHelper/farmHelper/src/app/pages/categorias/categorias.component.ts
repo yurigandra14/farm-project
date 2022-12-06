@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Categoria} from "../../model/enum/Categoria";
+import {Categoria} from "../../model/Categoria";
 import {CategoriaService} from "../../service/categoria.service";
 
 

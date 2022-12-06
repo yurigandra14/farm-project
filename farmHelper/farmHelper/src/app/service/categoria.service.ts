@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Categoria} from "../model/enum/Categoria";
+import {Categoria} from "../model/Categoria";
 
 @Injectable({
   providedIn: 'root'
