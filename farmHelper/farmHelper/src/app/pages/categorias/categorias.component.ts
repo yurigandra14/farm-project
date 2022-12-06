@@ -66,4 +66,11 @@ export class CategoriaComponent implements OnInit {
         this.formulario.descricao = despesa.descricao;
         this.isEditar = true
     }
+
+    limparCampos() {
+        if (this.isEditar) {
+            this.isEditar = false
+        }
+        this.formulario = new Categoria();
+    }
 }
