@@ -55,7 +55,7 @@ export class DespesasComponent implements OnInit {
     atualizar(id: number) {
         this.dadosService.obterDespesa(id)
             .subscribe(res => {
-                this.formulario = new Despesa(res.fornecedor, res.descricao, res.dataPagamento, res.dataVencimento, res.formaPagamento,res.notaFiscal, res.valor, res.status)
+                this.formulario = res
             });
         this.isEditar = true;
     }
