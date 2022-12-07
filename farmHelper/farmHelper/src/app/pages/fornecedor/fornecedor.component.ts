@@ -52,7 +52,6 @@ export class FornecedorComponent implements OnInit {
     }
 
     salvaAndBuscaFornecedores() {
-        this.formulario.id = Fornecedor.contador;
         this.fornecedorService.saveFornecedor(this.formulario)
         return this.fornecedorService.getForncedores();
     }
@@ -74,6 +73,7 @@ export class FornecedorComponent implements OnInit {
         this.formulario.email = fornecedor.email;
         this.formulario.descricao = fornecedor.descricao;
         this.formulario.telefone = fornecedor.telefone;
+        this.formulario.status = fornecedor.status;
         this.isEditar = true;
     }
 

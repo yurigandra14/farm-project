@@ -9,12 +9,19 @@ export class FornecedorService {
   constructor() { }
 
   private fornecedores: Fornecedor[] = [];
+  private indexId: number = 0
+
+  getProximoId(): number {
+    this.indexId += 1;
+    return this.indexId
+  }
 
   getForncedores(): Fornecedor[] {
     return this.fornecedores;
   }
 
   saveFornecedor(fornecedor: Fornecedor): void {
+    fornecedor.id = this.getProximoId()
     this.fornecedores.push(fornecedor)
   }
 
