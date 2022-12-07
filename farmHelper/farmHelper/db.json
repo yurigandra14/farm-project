@@ -1,0 +1,48 @@
+{
+  "despesas": [
+    {
+      "status": true,
+      "fornecedor": "Miguel",
+      "descricao": "Leiteiro",
+      "dataPagamento": "2022-12-06",
+      "dataVencimento": "2022-12-13",
+      "formaPagamento": "DINHEIRO",
+      "notaFiscal": "dsads582",
+      "valor": 250,
+      "id": 1
+    },
+    {
+      "status": true,
+      "fornecedor": "Jose",
+      "descricao": "Sal e Ração",
+      "dataPagamento": "2022-12-05",
+      "dataVencimento": "2022-12-10",
+      "formaPagamento": "DINHEIRO",
+      "notaFiscal": "6698f5d",
+      "valor": 1500,
+      "id": 2
+    },
+    {
+      "status": false,
+      "fornecedor": "Alberto",
+      "descricao": "Vacina",
+      "dataPagamento": "2022-12-06",
+      "dataVencimento": "2022-12-16",
+      "formaPagamento": "CHEQUE",
+      "notaFiscal": "ab782ga8f5d",
+      "valor": 3600,
+      "id": 3
+    },
+    {
+      "status": false,
+      "fornecedor": "Michel",
+      "descricao": "Funcionário",
+      "dataPagamento": "2022-12-06",
+      "dataVencimento": "2022-12-10",
+      "formaPagamento": "DINHEIRO",
+      "notaFiscal": "25897ds526",
+      "valor": 3800,
+      "id": 4
+    }
+  ]
+}

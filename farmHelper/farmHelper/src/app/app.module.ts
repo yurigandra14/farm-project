@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import {DadosService} from "./pages/Dados.service";
+import {HttpClientModule} from "@angular/common/http";
 import {PageService} from "./pages/page.service";
 
 
@@ -28,8 +30,9 @@ import {PageService} from "./pages/page.service";
     NavbarModule,
     ToastrModule.forRoot(),
     FooterModule,
+    HttpClientModule
   ],
-  providers: [PageService],
+  providers: [PageService, DadosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
