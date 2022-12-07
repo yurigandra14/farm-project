@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Categoria} from "../../model/Categoria";
 import {CategoriaService} from "../../service/categoria.service";
+import {Fornecedor} from "../../model/Fornecedor";
 
 
 
@@ -38,6 +39,7 @@ export class CategoriaComponent implements OnInit {
         if (this.isEditar) {
             this.categorias = this.atualizaAndBuscaCategorias()
             this.isEditar = false;
+            this.formulario = new Fornecedor();
             return;
         }
         this.categorias = this.salvaAndBuscaCategorias()
