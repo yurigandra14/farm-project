@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PageService} from "../page.service";
 
 
 @Component({
@@ -8,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ReceitasComponent implements OnInit{
+
+    constructor(private pageService: PageService) {
+    }
 
     formasPagamento: string[] = ['ESCOLHA A FORMA DE PAGAMENTO','PIX', 'CHEQUE', 'DINHEIRO', 'CARTÃO'];
     receitas: Receitas[];
@@ -34,40 +38,38 @@ export class ReceitasComponent implements OnInit{
             new Receitas('Rafaela', 'Medicamentos', new Date(2022, 11, 17), new Date(2022, 11, 18), FormaPag.DINHEIRO, '66962533', 1500),
             new Receitas('Josefina', 'Vacinas', new Date(2022, 11, 22), new Date(2022, 11, 23), FormaPag.DINHEIRO, '112345434', 3600),
         ]
+        this.pageService.buscaReceitas(this.receitas);
     }
 
     cadastrarReceita() {
-        console.log(this.formulario);
         if (this.isEditar) {
             this.receitas.forEach(receita => {
                 if(receita.id === this.formulario.id) {
-                    receita = this.formulario;
+                    this.receitas = this.receitas.filter(item => item.id != receita.id);
                 }
             })
+            this.receitas.push(this.formulario);
             this.isEditar = false;
+            this.clicked = false;
+            this.pageService.buscaReceitas(this.receitas);
             return;
         }
         this.formulario.id = Receitas.contador;
         this.receitas.push(this.formulario);
         this.formulario = new Receitas();
+        this.pageService.buscaReceitas(this.receitas);
     }
 
     deletar(id: number) {
         this.receitas = this.receitas.filter(receita => receita.id !== id);
+        this.pageService.buscaReceitas(this.receitas);
     }
 
     atualizar(receitas: Receitas) {
+        this.pageService.listaReceitas();
         this.clicked = true;
         this.isEditar = true;
         this.formulario.id = receitas.id;
-        this.formulario.fornecedor = receitas.fornecedor;
-        this.formulario.descricao = receitas.descricao;
-        this.formulario.dataPagamento = receitas.dataPagamento;
-        this.formulario.dataVencimento = receitas.dataVencimento;
-        this.formulario.formaPagamento = receitas.formaPagamento;
-        this.formulario.valor = receitas.valor;
-        this.formulario.notaFiscal = receitas.notaFiscal;
-        this.formulario.status = receitas.status;
     }
 
     novaReceita() {

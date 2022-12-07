@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import {PageService} from "./pages/page.service";
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     ToastrModule.forRoot(),
     FooterModule,
   ],
-  providers: [],
+  providers: [PageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
