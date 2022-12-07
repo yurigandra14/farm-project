@@ -32,13 +32,7 @@ export class ReceitasComponent implements OnInit{
     clicked: boolean = false;
 
     ngOnInit(){
-        this.receitas = [
-            new Receitas('Yuri', 'Mão de obra manejo ordenha', new Date(2022, 11, 8), new Date(2022, 11, 15), FormaPag.DINHEIRO, '555449841321', 800),
-            new Receitas('José Miguel', 'Minerais', new Date(2022, 11, 11), new Date(2022, 11, 13), FormaPag.DINHEIRO, '65423334', 900),
-            new Receitas('Rafaela', 'Medicamentos', new Date(2022, 11, 17), new Date(2022, 11, 18), FormaPag.DINHEIRO, '66962533', 1500),
-            new Receitas('Josefina', 'Vacinas', new Date(2022, 11, 22), new Date(2022, 11, 23), FormaPag.DINHEIRO, '112345434', 3600),
-        ]
-        this.pageService.buscaReceitas(this.receitas);
+        this.receitas = this.pageService.listaReceitas();
     }
 
     cadastrarReceita() {
@@ -51,22 +45,22 @@ export class ReceitasComponent implements OnInit{
             this.receitas.push(this.formulario);
             this.isEditar = false;
             this.clicked = false;
-            this.pageService.buscaReceitas(this.receitas);
+            this.pageService.atualizarReceitas(this.receitas);
             return;
         }
         this.formulario.id = Receitas.contador;
         this.receitas.push(this.formulario);
         this.formulario = new Receitas();
-        this.pageService.buscaReceitas(this.receitas);
+        this.clicked = false;
+        this.pageService.atualizarReceitas(this.receitas);
     }
 
     deletar(id: number) {
         this.receitas = this.receitas.filter(receita => receita.id !== id);
-        this.pageService.buscaReceitas(this.receitas);
+        this.pageService.atualizarReceitas(this.receitas);
     }
 
     atualizar(receitas: Receitas) {
-        this.pageService.listaReceitas();
         this.clicked = true;
         this.isEditar = true;
         this.formulario.id = receitas.id;
