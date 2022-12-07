@@ -9,12 +9,19 @@ export class CategoriaService {
   constructor() { }
 
   private categorias: Categoria[] = [];
+  private indexId: number = 0
+
+  getProximoId(): number {
+    this.indexId += 1;
+    return this.indexId
+  }
 
   getCategorias(): Categoria[] {
     return this.categorias;
   }
 
   saveCategoria(categoria: Categoria): void {
+    categoria.id = this.getProximoId()
     this.categorias.push(categoria)
   }
 

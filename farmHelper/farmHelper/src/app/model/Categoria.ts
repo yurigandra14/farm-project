@@ -5,8 +5,6 @@ export class Categoria {
     public descricao: string;
 
     constructor(nome?: string, descricao?: string) {
-        Categoria.contador ++;
-        this.id = Categoria.contador;
         this.nome = nome;
         this.descricao = descricao;
     }

@@ -47,7 +47,6 @@ export class CategoriaComponent implements OnInit {
     }
 
     salvaAndBuscaCategorias() {
-        this.formulario.id = Categoria.contador;
         this.categoriaService.saveCategoria(this.formulario)
         return this.categoriaService.getCategorias();
     }
