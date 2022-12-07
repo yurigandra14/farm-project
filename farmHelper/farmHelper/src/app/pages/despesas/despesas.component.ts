@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Despesa} from "../../model/Despesa";
 import {DadosService} from "../Dados.service";
-import {EnumPago} from "../../model/EnumStatusPagamento";
 
 
 @Component({
@@ -27,24 +26,25 @@ export class DespesasComponent implements OnInit {
     ];
     formulario: Despesa = new Despesa();
     isEditar: boolean = false;
-
-    constructor(private dadosService: DadosService) {
-    }
+    clicked: boolean = false;
 
     ngOnInit(){
         this.listarDespesas();
     }
 
+    constructor(private dadosService: DadosService) {
+    }
+
     cadastrarDespesa() {
-        this.ajustarStatus();
         if (this.isEditar) {
             this.dadosService.atualizarDespesa(this.formulario.id, this.formulario)
                 .subscribe(() => this.listarDespesas());
-            this.isEditar = false;
+            this.fecharDialog();
             return;
         }
         this.dadosService.cadastrarDespesa(this.formulario)
             .subscribe(() => this.listarDespesas());
+        this.fecharDialog();
         this.formulario = new Despesa();
     }
 
@@ -53,11 +53,12 @@ export class DespesasComponent implements OnInit {
     }
 
     atualizar(id: number) {
+        this.isEditar = true;
+        this.clicked = true;
         this.dadosService.obterDespesa(id)
             .subscribe(res => {
                 this.formulario = res
             });
-        this.isEditar = true;
     }
 
     listarDespesas() {
@@ -69,17 +70,20 @@ export class DespesasComponent implements OnInit {
     }
 
     marcarPago(despesa) {
-        despesa.status = despesa.status === EnumPago.SIM ? EnumPago.NAO : EnumPago.SIM;
+        despesa.status = despesa.status !== true;
         this.dadosService.atualizarItemDespesa(despesa.id, despesa)
             .subscribe(res => this.listarDespesas());
     }
 
-    private ajustarStatus() {
-        if (this.formulario.status === undefined || this.formulario.status === null) {
-            this.formulario.status = EnumPago.NAO;
-            return;
-        }
-        this.formulario.status = EnumPago.SIM;
+    fecharDialog() {
+        this.clicked = false;
+        this.isEditar = false;
+    }
+
+    novaDespesa() {
+        this.formulario = new Despesa();
+        this.clicked = true;
+        this.isEditar = false;
     }
 }
 
