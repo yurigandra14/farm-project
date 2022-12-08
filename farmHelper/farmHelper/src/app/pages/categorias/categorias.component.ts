@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Categoria} from "../../model/Categoria";
 import {CategoriaService} from "../../service/categoria.service";
-import {Fornecedor} from "../../model/Fornecedor";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 
@@ -19,7 +19,7 @@ export class CategoriaComponent implements OnInit {
         'Descrição',
         'Operações',
     ];
-    formulario: Categoria = new Categoria();
+    formulario: FormGroup = new FormGroup({});
     isEditar: boolean = false;
 
 
@@ -27,6 +27,11 @@ export class CategoriaComponent implements OnInit {
     }
 
     ngOnInit(){
+        this.formulario = new FormGroup({
+            id: new FormControl(''),
+            nome: new FormControl('', Validators.required),
+            descricao: new FormControl('', Validators.required)
+        })
         this.categorias = this.categoriaService.getCategorias()
         this.categoriaService.saveCategoria(new Categoria('Ordenha', 'Mão de obra manejo ordenha'))
         this.categoriaService.saveCategoria(new Categoria('Manejo Leiteiro', 'Mão de obra manejo ordenha'))
@@ -36,23 +41,26 @@ export class CategoriaComponent implements OnInit {
     }
 
     cadastrarCategoria() {
+        if (this.formulario.invalid) {
+            return
+        }
         if (this.isEditar) {
             this.categorias = this.atualizaAndBuscaCategorias()
             this.isEditar = false;
-            this.formulario = new Fornecedor();
+            this.formulario.reset();
             return;
         }
         this.categorias = this.salvaAndBuscaCategorias()
-        this.formulario = new Categoria();
+        this.formulario.reset();
     }
 
     salvaAndBuscaCategorias() {
-        this.categoriaService.saveCategoria(this.formulario)
+        this.categoriaService.saveCategoria(this.formulario.getRawValue())
         return this.categoriaService.getCategorias();
     }
 
     atualizaAndBuscaCategorias() {
-        this.categoriaService.atualizarCategoria(this.formulario)
+        this.categoriaService.atualizarCategoria(this.formulario.getRawValue())
         return this.categoriaService.getCategorias();
     }
 
@@ -62,9 +70,9 @@ export class CategoriaComponent implements OnInit {
     }
 
     atualizar(despesa: Categoria) {
-        this.formulario.id = despesa.id;
-        this.formulario.nome = despesa.nome;
-        this.formulario.descricao = despesa.descricao;
+        this.formulario.controls['id'].setValue(despesa.id);
+        this.formulario.controls['nome'].setValue(despesa.nome);
+        this.formulario.controls['descricao'].setValue(despesa.descricao);
         this.isEditar = true
     }
 
@@ -72,6 +80,6 @@ export class CategoriaComponent implements OnInit {
         if (this.isEditar) {
             this.isEditar = false
         }
-        this.formulario = new Categoria();
+        this.formulario.reset();
     }
 }
