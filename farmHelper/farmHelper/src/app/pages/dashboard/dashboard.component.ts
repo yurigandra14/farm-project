@@ -230,9 +230,10 @@ export class DashboardComponent implements OnInit {
     receitasComponente.ngOnInit()
     let despesas = despesasComponente.getDespesas()
     let receitas = receitasComponente.getReceitas()
-    console.log(receitas);
-    let now = new Date()
 
+    // console.log(receitas);
+    
+    let now = new Date()
     let quinzeDias = new Date()
     let trintaDias = new Date()
     quinzeDias.setDate(now.getDate() + 15)
@@ -245,23 +246,19 @@ export class DashboardComponent implements OnInit {
     if (nextMonth == 12) nextMonth = 0
     if (lastMonth == -1) lastMonth = 11
 
-    // console.log(currentMonth, lastMonth, nextMonth);
-    // console.log(desp.dataVencimento.getMonth());
 
     receitas.forEach(receita => {
+      // console.log(receita.dataVencimento);
 
       // RECEITAS DO MÊS ATUAL
-      console.log(receita.dataVencimento);
       if (receita.dataVencimento.getMonth() == currentMonth && receita.status == 0) {
         this.receitaMesAtual += receita.valor
       }
-
+      // RECEITAS DO MÊS ANTERIOR
       if (receita.dataVencimento.getMonth() == lastMonth && receita.status == 0) {
-        
-        
         this.receitaMesPassado += receita.valor
       }
-
+      // RECEITAS DO PRÓXIMO MÊS
       if (receita.dataVencimento.getMonth() == nextMonth && receita.status == 0) {
         this.receitaMesProximo += receita.valor
       }
@@ -279,51 +276,22 @@ export class DashboardComponent implements OnInit {
         this.contasParaPagarProximas++
       }
 
-      // // DESPESAS DO MÊS ATUAL
-      // let currentMonth = now.getMonth()
-      // let lastMonth = now.getMonth() - 1
-      // let nextMonth = now.getMonth() + 1
-
-      // if (nextMonth == 12) nextMonth = 0
-      // if (lastMonth == -1) lastMonth = 11
-
-      // console.log(currentMonth, lastMonth, nextMonth);
-      // console.log(desp.dataVencimento.getMonth());
-
-
+      // CONTAS DO MÊS ATUAL
       if (desp.dataVencimento.getMonth() == currentMonth && desp.status == 0) {
         this.despesaMesAtual += desp.valor
       }
 
+      // CONTAS DO MÊS ANTERIOR
       if (desp.dataVencimento.getMonth() == lastMonth && desp.status == 0) {
         this.despesaMesPassado += desp.valor
       }
 
+      // CONTAS DO PRÓXIMO MÊS
       if (desp.dataVencimento.getMonth() == nextMonth && desp.status == 0) {
         this.despesaMesProximo += desp.valor
       }
 
     });
-
-    // this.a.ngOnInit()
-    // this.b = this.a.getDespesas()
-    // console.log("#################");
-    // // console.log(this.b);
-    // let now = new Date()
-    // console.log(now);
-    // console.log("NOW = "+now.getMonth());
-    // // console.log(this.b[0].dataVencimento.getMonth());
-
-    // despesas.forEach(element => {
-    //    if(element.dataVencimento.getTime() >= now.getTime()){
-    //      console.log("SIM",element.dataVencimento.getTime());
-    //     }else{
-    //       console.log(element.dataVencimento.getTime(), " >= ", now.getTime());
-
-    //     }
-    // });
-
-    // console.log("#################");
 
   }
 }
