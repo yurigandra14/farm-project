@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import { DespesasComponent } from '../despesas/despesas.component';
+import { ReceitasComponent } from './../receitas/receitas.component';
 
 
 @Component({
@@ -224,43 +225,71 @@ export class DashboardComponent implements OnInit {
 
   inicializa() {
     let despesasComponente = new DespesasComponent()
+    let receitasComponente = new ReceitasComponent()
     despesasComponente.ngOnInit()
+    receitasComponente.ngOnInit()
     let despesas = despesasComponente.getDespesas()
-    console.log(despesas);
+    let receitas = receitasComponente.getReceitas()
+    console.log(receitas);
     let now = new Date()
 
     let quinzeDias = new Date()
     let trintaDias = new Date()
     quinzeDias.setDate(now.getDate() + 15)
     trintaDias.setDate(now.getDate() + 30)
-    console.log(now);
-    console.log(quinzeDias);
-    console.log(trintaDias);
 
+    let currentMonth = now.getMonth()
+    let lastMonth = now.getMonth() - 1
+    let nextMonth = now.getMonth() + 1
+
+    if (nextMonth == 12) nextMonth = 0
+    if (lastMonth == -1) lastMonth = 11
+
+    // console.log(currentMonth, lastMonth, nextMonth);
+    // console.log(desp.dataVencimento.getMonth());
+
+    receitas.forEach(receita => {
+
+      // RECEITAS DO MÊS ATUAL
+      console.log(receita.dataVencimento);
+      if (receita.dataVencimento.getMonth() == currentMonth && receita.status == 0) {
+        this.receitaMesAtual += receita.valor
+      }
+
+      if (receita.dataVencimento.getMonth() == lastMonth && receita.status == 0) {
+        
+        
+        this.receitaMesPassado += receita.valor
+      }
+
+      if (receita.dataVencimento.getMonth() == nextMonth && receita.status == 0) {
+        this.receitaMesProximo += receita.valor
+      }
+
+    });
 
     despesas.forEach(desp => {
-      // // CONTAS VENCIDAS
-      // if(desp.dataVencimento.getTime()<= now.getTime()){
-      //   this.contasParaPagarVencidas++
-      // }
+      // CONTAS VENCIDAS
+      if(desp.dataVencimento.getTime()<= now.getTime()){
+        this.contasParaPagarVencidas++
+      }
 
-      // // CONTAS A VENCER NO PRÓXIMO MÊS
-      // if(desp.dataVencimento.getTime() <= trintaDias.getTime() && desp.dataVencimento.getTime() < now.getTime()){
-      //   this.contasParaPagarProximas++
-      // }
+      // CONTAS A VENCER NO PRÓXIMO MÊS
+      if(desp.dataVencimento.getTime() <= trintaDias.getTime() && desp.dataVencimento.getTime() < now.getTime()){
+        this.contasParaPagarProximas++
+      }
 
-      // DESPESAS DO MÊS ATUAL
-      let currentMonth = now.getMonth()
-      let lastMonth = now.getMonth()-1
-      let nextMonth = now.getMonth()+1
+      // // DESPESAS DO MÊS ATUAL
+      // let currentMonth = now.getMonth()
+      // let lastMonth = now.getMonth() - 1
+      // let nextMonth = now.getMonth() + 1
 
-      if(nextMonth == 12) nextMonth =0
-      if(lastMonth == -1) lastMonth = 11
+      // if (nextMonth == 12) nextMonth = 0
+      // if (lastMonth == -1) lastMonth = 11
 
-      console.log(currentMonth, lastMonth, nextMonth);
-      console.log(desp.dataVencimento.getMonth());
-      
-      
+      // console.log(currentMonth, lastMonth, nextMonth);
+      // console.log(desp.dataVencimento.getMonth());
+
 
       if (desp.dataVencimento.getMonth() == currentMonth && desp.status == 0) {
         this.despesaMesAtual += desp.valor

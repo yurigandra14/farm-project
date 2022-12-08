@@ -14,9 +14,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/table',         title: 'Fornecedor/Cliente',          icon:'nc-bus-front-12',    class: '' },
     { path: '/table',         title: 'Dia Vencimento Padrão',       icon:'nc-calendar-60',    class: '' },
     { path: '/table',         title: 'Formas de Pagamento',         icon:'nc-money-coins',    class: '' },
-    { path: '/table',         title: 'Receitas',                    icon:'nc-paper',    class: '' },
-    { path: '/despesas',      title: 'Despesas',                    icon:'nc-paper',    class: '' },
     { path: '/receitas',         title: 'Receitas',        icon:'nc-money-coins',    class: '' },
+    { path: '/despesas',      title: 'Despesas',                    icon:'nc-paper',    class: '' },
 ];
 
 @Component({
