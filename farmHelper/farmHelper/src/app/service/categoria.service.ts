@@ -1,36 +1,32 @@
 import { Injectable } from '@angular/core';
 import {Categoria} from "../model/Categoria";
+import {environment} from "../../environments/environment";
+import {Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
 
-  constructor() { }
+  private readonly urlBase = environment.url;
 
-  private categorias: Categoria[] = [];
-  private indexId: number = 0
-
-  getProximoId(): number {
-    this.indexId += 1;
-    return this.indexId
+  constructor(private http: HttpClient) {
   }
 
-  getCategorias(): Categoria[] {
-    return this.categorias;
+  getCategorias(): Observable<Categoria[]> {
+    return this.http.get<Categoria[]>(`${this.urlBase}/categorias`);
   }
 
-  saveCategoria(categoria: Categoria): void {
-    categoria.id = this.getProximoId()
-    this.categorias.push(categoria)
+  saveCategoria(categoria: Categoria): Observable<Categoria> {
+    return this.http.post<Categoria>(`${this.urlBase}/categorias`, categoria);
   }
 
-  deletarCategoria(id: number): void {
-    this.categorias = this.categorias.filter(categoria => categoria.id !== id);
+  atualizarCategoria(categoria: Categoria): Observable<Categoria> {
+    return this.http.put<Categoria>(`${this.urlBase}/categorias/${categoria.id}`, categoria);
   }
 
-  atualizarCategoria(categoriaAtualizar: Categoria) {
-    this.categorias = this.categorias.filter(categoria => categoria.id !== categoriaAtualizar.id);
-    this.categorias.push(categoriaAtualizar)
+  deletarCategoria(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.urlBase}/categorias/${id}`);
   }
 }

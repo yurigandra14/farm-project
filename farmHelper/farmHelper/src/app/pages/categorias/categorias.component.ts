@@ -33,12 +33,9 @@ export class CategoriaComponent implements OnInit {
             nome: new FormControl('', Validators.required),
             descricao: new FormControl('', Validators.required)
         })
-        this.categorias = this.categoriaService.getCategorias()
-        this.categoriaService.saveCategoria(new Categoria('Ordenha', 'Mão de obra manejo ordenha'))
-        this.categoriaService.saveCategoria(new Categoria('Manejo Leiteiro', 'Mão de obra manejo ordenha'))
-        this.categoriaService.saveCategoria(new Categoria('Teste', 'Mão de obra manejo ordenha'))
-        this.categoriaService.saveCategoria(new Categoria('teste2', 'Mão de obra manejo ordenha'))
-        this.categorias = this.categoriaService.getCategorias();
+        this.categoriaService.getCategorias().subscribe(res => {
+            this.categorias = res
+        })
     }
 
     cadastrarCategoria() {
@@ -48,28 +45,37 @@ export class CategoriaComponent implements OnInit {
             return
         }
         if (this.isEditar) {
-            this.categorias = this.atualizaAndBuscaCategorias()
+            this.atualizaAndBuscaCategorias()
             this.isEditar = false;
             this.formulario.reset();
             return;
         }
-        this.categorias = this.salvaAndBuscaCategorias()
+        this.salvaAndBuscaCategorias()
         this.formulario.reset();
     }
 
     salvaAndBuscaCategorias() {
-        this.categoriaService.saveCategoria(this.formulario.getRawValue())
-        return this.categoriaService.getCategorias();
+        this.categoriaService.saveCategoria(this.formulario.getRawValue()).subscribe(res => {
+            this.buscarCategorias()
+        })
     }
 
     atualizaAndBuscaCategorias() {
-        this.categoriaService.atualizarCategoria(this.formulario.getRawValue())
-        return this.categoriaService.getCategorias();
+        this.categoriaService.atualizarCategoria(this.formulario.getRawValue()).subscribe(res => {
+            this.buscarCategorias()
+        })
+    }
+
+    buscarCategorias(){
+        this.categoriaService.getCategorias().subscribe(res => {
+            this.categorias = res
+        })
     }
 
     deletar(id: number) {
-        this.categoriaService.deletarCategoria(id)
-        this.categorias = this.categoriaService.getCategorias()
+        this.categoriaService.deletarCategoria(id).subscribe(res => {
+            this.buscarCategorias()
+        })
     }
 
     atualizar(despesa: Categoria) {

@@ -44,5 +44,22 @@
       "valor": 3800,
       "id": 4
     }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nome": "Manejo Gado",
+      "descricao": "Manejo com Gado Leiteiro"
+    },
+    {
+      "id": 2,
+      "nome": "Manejo Gado 2",
+      "descricao": "Manejo com Gado Leiteiro 2"
+    },
+    {
+      "id": 3,
+      "nome": "Manejo Gado 3",
+      "descricao": "Manejo com Gado Leiteiro 3"
+    }
   ]
 }
