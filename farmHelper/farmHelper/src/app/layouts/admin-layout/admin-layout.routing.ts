@@ -5,6 +5,7 @@ import {ReceitasComponent} from "../../pages/receitas/receitas.component";
 import {DespesasComponent} from "../../pages/despesas/despesas.component";
 import {CategoriaComponent} from "../../pages/categorias/categorias.component";
 import {FornecedorComponent} from "../../pages/fornecedor/fornecedor.component";
+import { FormasPagamentoComponent } from '../../pages/formaspagamento/formaspagamento.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -12,4 +13,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'despesas',          component: DespesasComponent },
     { path: 'categorias',          component: CategoriaComponent },
     { path: 'fornecedor',          component: FornecedorComponent },
+    { path: 'formaspagamento',  component: FormasPagamentoComponent},
 ];

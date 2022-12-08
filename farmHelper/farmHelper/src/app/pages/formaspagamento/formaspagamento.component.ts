@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormasPagamento} from "../../model/FormasPagamento";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {FormasPagamentoService} from "../../service/formaspagamento.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: 'formaspagamento-cmp',
