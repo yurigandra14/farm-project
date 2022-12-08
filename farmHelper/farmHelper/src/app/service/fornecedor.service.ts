@@ -1,36 +1,32 @@
 import { Injectable } from '@angular/core';
 import {Fornecedor} from "../model/Fornecedor";
+import {environment} from "../../environments/environment";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {Categoria} from "../model/Categoria";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FornecedorService {
 
-  constructor() { }
+  private readonly urlBase = environment.url;
 
-  private fornecedores: Fornecedor[] = [];
-  private indexId: number = 0
+  constructor(private http: HttpClient) { }
 
-  getProximoId(): number {
-    this.indexId += 1;
-    return this.indexId
+  getFornecedores(): Observable<Fornecedor[]> {
+    return this.http.get<Fornecedor[]>(`${this.urlBase}/fornecedor`);
   }
 
-  getForncedores(): Fornecedor[] {
-    return this.fornecedores;
+  saveFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
+    return this.http.post<Fornecedor>(`${this.urlBase}/fornecedor`, fornecedor);
   }
 
-  saveFornecedor(fornecedor: Fornecedor): void {
-    fornecedor.id = this.getProximoId()
-    this.fornecedores.push(fornecedor)
+  atualizarFornecedor(fornecedor: Fornecedor): Observable<Fornecedor> {
+    return this.http.put<Fornecedor>(`${this.urlBase}/fornecedor/${fornecedor.id}`, fornecedor);
   }
 
-  deletarFornecedor(id: number): void {
-    this.fornecedores = this.fornecedores.filter(fornecedor => fornecedor.id !== id);
-  }
-
-  atualizarFornecedor(fornecedorAtualizar: Fornecedor) {
-    this.fornecedores = this.fornecedores.filter(fornecedor => fornecedor.id !== fornecedorAtualizar.id);
-    this.fornecedores.push(fornecedorAtualizar)
+  deletarFornecedor(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.urlBase}/fornecedor/${id}`);
   }
 }

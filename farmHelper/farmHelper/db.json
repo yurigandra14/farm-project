@@ -61,5 +61,34 @@
       "nome": "Manejo Gado 3",
       "descricao": "Manejo com Gado Leiteiro 3"
     }
+  ],
+  "fornecedor": [
+    {
+      "id": 1,
+      "nome": "Adubo SA",
+      "cnpj": "12345678909123",
+      "email": "email",
+      "descricao": "descricao",
+      "telefone": "37998401578",
+      "status": "Fornecedor"
+    },
+    {
+      "id": 2,
+      "nome": "Alimentação SA",
+      "cnpj": "12345678909123",
+      "email": "email",
+      "descricao": "descricao",
+      "telefone": "37998401578",
+      "status": "Fornecedor"
+    },
+    {
+      "id": 3,
+      "nome": "Sementes SA",
+      "cnpj": "12345678909123",
+      "email": "email",
+      "descricao": "descricao",
+      "telefone": "37998401578",
+      "status": "Cliente"
+    }
   ]
 }

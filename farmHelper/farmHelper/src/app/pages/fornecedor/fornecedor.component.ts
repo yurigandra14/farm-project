@@ -43,12 +43,9 @@ export class FornecedorComponent implements OnInit {
             telefone: new FormControl('', Validators.required),
             status: new FormControl('', Validators.required),
         })
-        this.fornecedores = this.fornecedorService.getForncedores()
-        this.fornecedorService.saveFornecedor(new Fornecedor('Yuri', 'Mão de obra manejo ordenha', "teste@gmail.com", "teste", "37998456312", '555449841321', EnumTipoRelacionamento.FORNECEDOR))
-        this.fornecedorService.saveFornecedor(new Fornecedor('José Miguel', 'Minerais', "teste@gmail.com", "teste", "37998456312", '65423334', EnumTipoRelacionamento.CLIENTE))
-        this.fornecedorService.saveFornecedor(new Fornecedor('Rafaela', 'Medicamentos', "teste@gmail.com", "teste", "37998456312", '66962533', EnumTipoRelacionamento.FORNECEDOR))
-        this.fornecedorService.saveFornecedor(new Fornecedor('Josefina', 'Vacinas', "teste@gmail.com", "teste", "37998456312", '112345434', EnumTipoRelacionamento.FORNECEDOR))
-        this.fornecedores = this.fornecedorService.getForncedores()
+        this.fornecedorService.getFornecedores().subscribe(res => {
+            this.fornecedores = res
+        })
     }
 
     cadastrarDespesa() {
@@ -58,28 +55,37 @@ export class FornecedorComponent implements OnInit {
             return
         }
         if (this.isEditar) {
-            this.fornecedores = this.atualizaAndBuscaFornecedores()
+            this.atualizaAndBuscaFornecedores()
             this.formulario.reset();
             this.isEditar = false;
             return;
         }
-        this.fornecedores = this.salvaAndBuscaFornecedores()
+        this.salvaAndBuscaFornecedores()
         this.formulario.reset();
     }
 
     salvaAndBuscaFornecedores() {
-        this.fornecedorService.saveFornecedor(this.formulario.getRawValue())
-        return this.fornecedorService.getForncedores();
+        this.fornecedorService.saveFornecedor(this.formulario.getRawValue()).subscribe(res => {
+            this.fornecedorService.getFornecedores().subscribe(res => {
+                this.fornecedores = res
+            })
+        })
     }
 
     atualizaAndBuscaFornecedores() {
-        this.fornecedorService.atualizarFornecedor(this.formulario.getRawValue())
-        return this.fornecedorService.getForncedores();
+        this.fornecedorService.atualizarFornecedor(this.formulario.getRawValue()).subscribe(res => {
+            this.fornecedorService.getFornecedores().subscribe(res => {
+                this.fornecedores = res
+            })
+        })
     }
 
     deletar(id: number) {
-        this.fornecedorService.deletarFornecedor(id)
-        this.fornecedores = this.fornecedorService.getForncedores()
+        this.fornecedorService.deletarFornecedor(id).subscribe(res => {
+            this.fornecedorService.getFornecedores().subscribe(res => {
+                this.fornecedores = res
+            })
+        })
     }
 
     atualizar(fornecedor: Fornecedor) {
