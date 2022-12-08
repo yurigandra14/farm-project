@@ -8,7 +8,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 @Component({
     selector: 'categorias-cmp',
     moduleId: module.id,
-    templateUrl: 'categorias.component.html'
+    templateUrl: 'categorias.component.html',
+    styleUrls: ['categorias.component.css']
 })
 
 export class CategoriaComponent implements OnInit {
@@ -21,7 +22,7 @@ export class CategoriaComponent implements OnInit {
     ];
     formulario: FormGroup = new FormGroup({});
     isEditar: boolean = false;
-
+    temErro: boolean = false;
 
     constructor(private categoriaService: CategoriaService) {
     }
@@ -42,6 +43,8 @@ export class CategoriaComponent implements OnInit {
 
     cadastrarCategoria() {
         if (this.formulario.invalid) {
+            this.temErro = true
+            this.fecharModalAposCincoSegundos()
             return
         }
         if (this.isEditar) {
@@ -81,5 +84,11 @@ export class CategoriaComponent implements OnInit {
             this.isEditar = false
         }
         this.formulario.reset();
+    }
+
+    fecharModalAposCincoSegundos() {
+        setTimeout(() => {
+            this.temErro = false
+        }, 5000)
     }
 }

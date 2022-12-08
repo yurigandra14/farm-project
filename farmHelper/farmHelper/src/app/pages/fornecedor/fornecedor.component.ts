@@ -28,6 +28,7 @@ export class FornecedorComponent implements OnInit {
     ];
     formulario: FormGroup = new FormGroup({});
     isEditar: boolean = false;
+    temErro: boolean = false;
 
     constructor(private fornecedorService: FornecedorService) {
     }
@@ -52,6 +53,8 @@ export class FornecedorComponent implements OnInit {
 
     cadastrarDespesa() {
         if (this.formulario.invalid) {
+            this.temErro = true
+            this.fecharModalAposCincoSegundos()
             return
         }
         if (this.isEditar) {
@@ -95,6 +98,12 @@ export class FornecedorComponent implements OnInit {
             this.isEditar = false
         }
         this.formulario.reset();
+    }
+
+    fecharModalAposCincoSegundos() {
+        setTimeout(() => {
+            this.temErro = false
+        }, 5000)
     }
 
     get EnumTipoRelacionameto(): typeof EnumTipoRelacionamento {
