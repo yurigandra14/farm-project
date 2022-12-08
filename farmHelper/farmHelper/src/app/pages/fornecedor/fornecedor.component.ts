@@ -3,6 +3,7 @@ import {EnumTipoRelacionamento} from "../../model/enum/EnumTipoRelacionamento";
 import {Fornecedor} from "../../model/Fornecedor";
 import {FornecedorService} from "../../service/fornecedor.service";
 import {Categoria} from "../../model/Categoria";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 
@@ -25,13 +26,22 @@ export class FornecedorComponent implements OnInit {
         'Tipo',
         'Operações'
     ];
-    formulario: Fornecedor = new Fornecedor();
+    formulario: FormGroup = new FormGroup({});
     isEditar: boolean = false;
 
     constructor(private fornecedorService: FornecedorService) {
     }
 
     ngOnInit(){
+        this.formulario = new FormGroup({
+            id: new FormControl(''),
+            nome: new FormControl('', Validators.required),
+            cnpj: new FormControl('', Validators.required),
+            email: new FormControl('', [Validators.required, Validators.email]),
+            descricao: new FormControl('', Validators.required),
+            telefone: new FormControl('', Validators.required),
+            status: new FormControl('', Validators.required),
+        })
         this.fornecedores = this.fornecedorService.getForncedores()
         this.fornecedorService.saveFornecedor(new Fornecedor('Yuri', 'Mão de obra manejo ordenha', "teste@gmail.com", "teste", "37998456312", '555449841321', EnumTipoRelacionamento.FORNECEDOR))
         this.fornecedorService.saveFornecedor(new Fornecedor('José Miguel', 'Minerais', "teste@gmail.com", "teste", "37998456312", '65423334', EnumTipoRelacionamento.CLIENTE))
@@ -41,23 +51,26 @@ export class FornecedorComponent implements OnInit {
     }
 
     cadastrarDespesa() {
+        if (this.formulario.invalid) {
+            return
+        }
         if (this.isEditar) {
             this.fornecedores = this.atualizaAndBuscaFornecedores()
-            this.formulario = new Fornecedor();
+            this.formulario.reset();
             this.isEditar = false;
             return;
         }
         this.fornecedores = this.salvaAndBuscaFornecedores()
-        this.formulario = new Fornecedor();
+        this.formulario.reset();
     }
 
     salvaAndBuscaFornecedores() {
-        this.fornecedorService.saveFornecedor(this.formulario)
+        this.fornecedorService.saveFornecedor(this.formulario.getRawValue())
         return this.fornecedorService.getForncedores();
     }
 
     atualizaAndBuscaFornecedores() {
-        this.fornecedorService.atualizarFornecedor(this.formulario)
+        this.fornecedorService.atualizarFornecedor(this.formulario.getRawValue())
         return this.fornecedorService.getForncedores();
     }
 
@@ -67,13 +80,13 @@ export class FornecedorComponent implements OnInit {
     }
 
     atualizar(fornecedor: Fornecedor) {
-        this.formulario.id = fornecedor.id;
-        this.formulario.nome = fornecedor.nome;
-        this.formulario.cnpj = fornecedor.cnpj;
-        this.formulario.email = fornecedor.email;
-        this.formulario.descricao = fornecedor.descricao;
-        this.formulario.telefone = fornecedor.telefone;
-        this.formulario.status = fornecedor.status;
+        this.formulario.controls['id'].setValue(fornecedor.id);
+        this.formulario.controls['nome'].setValue(fornecedor.nome);
+        this.formulario.controls['cnpj'].setValue(fornecedor.cnpj);
+        this.formulario.controls['email'].setValue(fornecedor.email);
+        this.formulario.controls['descricao'].setValue(fornecedor.descricao);
+        this.formulario.controls['telefone'].setValue(fornecedor.telefone);
+        this.formulario.controls['status'].setValue(fornecedor.status);
         this.isEditar = true;
     }
 
@@ -81,7 +94,7 @@ export class FornecedorComponent implements OnInit {
         if (this.isEditar) {
             this.isEditar = false
         }
-        this.formulario = new Fornecedor();
+        this.formulario.reset();
     }
 
     get EnumTipoRelacionameto(): typeof EnumTipoRelacionamento {

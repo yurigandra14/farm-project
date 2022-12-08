@@ -3,32 +3,33 @@
         <h4 class="card-title"> Cadastrar Fornecedor/Cliente </h4>
     </div>
     <div class="card-body">
-        <form>
+        <form [formGroup]="formulario">
+            <input type="hidden" class="form-control" id="id" formControlName="id">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Nome" [(ngModel)]="formulario.nome">
+                    <input type="text" class="form-control" id="nome" placeholder="Nome" formControlName="nome">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" class="form-control" id="cnpj" placeholder="CNPJ" [(ngModel)]="formulario.cnpj">
+                    <input type="text" class="form-control" id="cnpj" placeholder="CNPJ" formControlName="cnpj">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="email">Email</label>
-                    <input class="form-control" type="email" name="email" id="email" placeholder="Email" [(ngModel)]="formulario.email">
+                    <input class="form-control" type="email" name="email" id="email" placeholder="Email" formControlName="email">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="descricao">Descrição</label>
-                    <input class="form-control" type="text" name="descricao" id="descricao" placeholder="Descrição" [(ngModel)]="formulario.descricao">
+                    <input class="form-control" type="text" name="descricao" id="descricao" placeholder="Descrição" formControlName="descricao">
                 </div>
             </div>
 
 
             <div class="form-group">
                 <label for="telefone">Telefone</label>
-                <input class="form-control"  type="text" name="telefone" id="telefone" placeholder="Telefone" [(ngModel)]="formulario.telefone">
+                <input class="form-control"  type="text" name="telefone" id="telefone" placeholder="Telefone" formControlName="telefone">
             </div>
 
             <div class="form-row">
@@ -39,7 +40,7 @@
                     <div class="form-check">
                         <input class="form-check-input margin-left" type="radio"
                                [value]="EnumTipoRelacionameto.FORNECEDOR"
-                               [(ngModel)]="formulario.status"
+                               formControlName="status"
                                id="radioTipoFornecedor"
                                name="radioTipoRelacionamento">
                         <label class="form-check-label" for="radioTipoFornecedor">
@@ -51,7 +52,7 @@
                     <div class="form-check">
                         <input class="form-check-input margin-left" type="radio"
                                [value]="EnumTipoRelacionameto.CLIENTE"
-                               [(ngModel)]="formulario.status"
+                               formControlName="status"
                                id="radioTipoCliente"
                                name="radioTipoRelacionamento">
                         <label class="form-check-label" for="radioTipoCliente">
