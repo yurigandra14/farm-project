@@ -2,11 +2,12 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Despesa} from "../model/Despesa";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class DadosService {
 
-    private readonly urlBase = 'http://localhost:3000';
+    private readonly urlBase = environment.url;
     constructor(private http: HttpClient) {
     }
 
