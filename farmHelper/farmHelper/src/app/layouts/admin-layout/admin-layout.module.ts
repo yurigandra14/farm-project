@@ -6,7 +6,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
-import { TableComponent } from '../../pages/table/table.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ReceitasComponent} from "../../pages/receitas/receitas.component";
@@ -24,7 +23,6 @@ import {FornecedorComponent} from "../../pages/fornecedor/fornecedor.component";
   ],
   declarations: [
     DashboardComponent,
-    TableComponent,
     ReceitasComponent,
     DespesasComponent,
     CategoriaComponent,
