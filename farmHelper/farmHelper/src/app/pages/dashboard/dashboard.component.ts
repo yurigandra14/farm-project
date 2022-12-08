@@ -22,6 +22,9 @@ export class DashboardComponent implements OnInit {
 
   public contasParaPagarVencidas = 0
   public contasParaPagarProximas = 0
+  public numContasParaPagarVencidas = 0
+  public numContasParaPagarProximas = 0
+
 
   public receitaMesPassado = 0
   public receitaMesAtual = 0
@@ -268,12 +271,14 @@ export class DashboardComponent implements OnInit {
     despesas.forEach(desp => {
       // CONTAS VENCIDAS
       if(desp.dataVencimento.getTime()<= now.getTime()){
-        this.contasParaPagarVencidas++
+        this.numContasParaPagarVencidas++
+        this.contasParaPagarVencidas += desp.valor
       }
 
       // CONTAS A VENCER NO PRÓXIMO MÊS
       if(desp.dataVencimento.getTime() <= trintaDias.getTime() && desp.dataVencimento.getTime() < now.getTime()){
-        this.contasParaPagarProximas++
+        this.numContasParaPagarProximas++
+        this.contasParaPagarProximas+= desp.valor
       }
 
       // CONTAS DO MÊS ATUAL
