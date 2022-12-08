@@ -28,10 +28,13 @@ export class DespesasComponent implements OnInit {
 
     ngOnInit(){
         this.despesas = [
-            new Despesas('Yuri', 'Mão de obra manejo ordenha', new Date(2022, 11, 8), new Date(2022, 11, 15), FormaPagamento.DINHEIRO, '555449841321', 800),
-            new Despesas('José Miguel', 'Minerais', new Date(2022, 11, 11), new Date(2022, 11, 13), FormaPagamento.DINHEIRO, '65423334', 900),
-            new Despesas('Rafaela', 'Medicamentos', new Date(2022, 11, 17), new Date(2022, 11, 18), FormaPagamento.DINHEIRO, '66962533', 1500),
-            new Despesas('Josefina', 'Vacinas', new Date(2022, 11, 22), new Date(2022, 11, 23), FormaPagamento.DINHEIRO, '112345434', 3600),
+            new Despesas('Yuri', 'Mão de obra manejo ordenha', new Date(2022, 11, 8),   new Date(2022, 10, 15), FormaPagamento.DINHEIRO, '555449841321', 800,EnumPago.NAO),
+            new Despesas('José Miguel', 'Minerais', new Date(2022, 11, 11),             new Date(2022, 10, 13), FormaPagamento.DINHEIRO, '65423334', 900,EnumPago.NAO),
+            new Despesas('Rafaela', 'Medicamentos', new Date(2022, 11, 17),             new Date(2022, 11, 18), FormaPagamento.DINHEIRO, '66962533', 1500,EnumPago.NAO),
+            new Despesas('Josefina', 'Vacinas', new Date(2022, 11, 22),                 new Date(2022, 11, 23), FormaPagamento.DINHEIRO, '112345434', 3600,EnumPago.NAO),
+            
+            new Despesas('Josefina', 'Vacinas', new Date(2022, 11, 22),                 new Date(2023, 0, 23), FormaPagamento.DINHEIRO, '112345434', 3600,EnumPago.NAO),
+            
         ]
     }
 
@@ -64,6 +67,10 @@ export class DespesasComponent implements OnInit {
         this.formulario.dataVencimento = despesa.dataVencimento;
         this.formulario.formaPagamento = despesa.formaPagamento;
         this.isEditar = true;
+    }
+
+    getDespesas(){
+        return this.despesas;
     }
 }
 
