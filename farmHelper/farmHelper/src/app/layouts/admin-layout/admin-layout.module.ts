@@ -12,6 +12,9 @@ import {ReceitasComponent} from "../../pages/receitas/receitas.component";
 import {DespesasComponent} from "../../pages/despesas/despesas.component";
 import {CategoriaComponent} from "../../pages/categorias/categorias.component";
 import {FornecedorComponent} from "../../pages/fornecedor/fornecedor.component";
+import {IConfig, NgxMaskModule} from "ngx-mask";
+
+export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   imports: [
@@ -19,7 +22,8 @@ import {FornecedorComponent} from "../../pages/fornecedor/fornecedor.component";
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
   declarations: [
     DashboardComponent,

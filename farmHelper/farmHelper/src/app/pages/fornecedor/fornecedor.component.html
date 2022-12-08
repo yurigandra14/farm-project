@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" class="form-control" id="cnpj" placeholder="CNPJ" formControlName="cnpj">
+                    <input type="text" mask="00.000.000/0000-00" class="form-control" id="cnpj" placeholder="CNPJ" formControlName="cnpj">
                 </div>
             </div>
             <div class="form-row">
@@ -26,10 +26,9 @@
                 </div>
             </div>
 
-
             <div class="form-group">
                 <label for="telefone">Telefone</label>
-                <input class="form-control"  type="text" name="telefone" id="telefone" placeholder="Telefone" formControlName="telefone">
+                <input class="form-control"  mask="(00) 0 0000-0000" type="text" name="telefone" id="telefone" placeholder="Telefone" formControlName="telefone">
             </div>
 
             <div class="form-row">
@@ -96,7 +95,7 @@
                                     {{fornecedor.nome}}
                                 </td>
                                 <td>
-                                    {{fornecedor.cnpj}}
+                                    {{fornecedor.cnpj | mask: '00.000.000/0000-00'}}
                                 </td>
                                 <td>
                                     {{fornecedor.email}}
@@ -105,7 +104,7 @@
                                     {{fornecedor.descricao}}
                                 </td>
                                 <td>
-                                    {{fornecedor.telefone}}
+                                    {{fornecedor.telefone | mask: '(00) 0 0000-0000'}}
                                 </td>
                                 <td>
                                     {{fornecedor.status}}
