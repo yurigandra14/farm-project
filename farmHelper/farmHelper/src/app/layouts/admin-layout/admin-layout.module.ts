@@ -14,6 +14,7 @@ import {CategoriaComponent} from "../../pages/categorias/categorias.component";
 import {FornecedorComponent} from "../../pages/fornecedor/fornecedor.component";
 import { FormasPagamentoComponent } from '../../pages/formaspagamento/formaspagamento.component';
 import {IConfig, NgxMaskModule} from "ngx-mask";
+import { DataVencimentoComponent } from '../../pages/datavencimento/datavencimento.component';
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
@@ -32,7 +33,8 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     DespesasComponent,
     CategoriaComponent,
     FornecedorComponent,
-    FormasPagamentoComponent
+    FormasPagamentoComponent,
+    DataVencimentoComponent
   ]
 })
 
