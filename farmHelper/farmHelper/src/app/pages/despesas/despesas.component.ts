@@ -25,6 +25,7 @@ export class DespesasComponent implements OnInit {
     ];
     formulario: Despesas = new Despesas();
     isEditar: boolean = false;
+    clicked: boolean = false;
 
     ngOnInit(){
         this.despesas = [
@@ -40,6 +41,7 @@ export class DespesasComponent implements OnInit {
 
     cadastrarDespesa() {
         console.log(this.formulario);
+        console.log(typeof this.formulario);
         if (this.isEditar) {
             this.despesas.forEach(despesa => {
                 if(despesa.id === this.formulario.id) {
@@ -60,13 +62,20 @@ export class DespesasComponent implements OnInit {
 
     atualizar(despesa: Despesas) {
         console.log(despesa);
+        this.clicked = true;
+        this.isEditar = true;
         this.formulario.id = despesa.id;
         this.formulario.fornecedor = despesa.fornecedor;
         this.formulario.descricao = despesa.descricao;
         this.formulario.dataPagamento = despesa.dataPagamento;
         this.formulario.dataVencimento = despesa.dataVencimento;
         this.formulario.formaPagamento = despesa.formaPagamento;
-        this.isEditar = true;
+
+    }
+
+    novaDespesa() {
+        this.clicked = true;
+        this.isEditar = false;
     }
 
     getDespesas(){
